@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Room, Message
+from django.http import JsonResponse, HttpResponse
 
 # Create your views here.
 
@@ -21,6 +22,10 @@ def room(request, room):
     room_details = Room.objects.get(name=room)
     username = request.GET['username']
     return render(request, 'room.html',
-                {'username':username,
-                 'room':room,
+                {'username':username,                 'room':room,
                  'room_details':room_details})
+
+def getMessages(request,room):
+    room_details = Room.objects.get(name=room)
+    message = Message.objects.filter(room=room_details.name)
+    return JsonResponse({'messages':list(message.values())})
