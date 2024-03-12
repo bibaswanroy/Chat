@@ -20,6 +20,7 @@ body {
 .darker {
   border-color: #ccc;
   background-color: #ddd;
+  width:max-content;
 }
 
 .container::after {
@@ -80,15 +81,15 @@ setInterval(function(){
             for (var key in response.messages)
             { 
                 var cont = "<div class='container darker'";
-                var pad = "";
+                var righter = " style='padding:0px;";
                 if(response.username == response.messages[key].username) {
-                  cont = cont + " style='text-align:right;'";
-                  pad = pad + " style='padding-left:50%;'";
+                  cont = cont + " style='text-align:right;float:right;'";
+                  righter = righter + "overflow:hidden;'";
                 }
-                else {
-                  pad = pad + " style='padding-right:50%'";
-                }
-                var temp = "<div" + pad + ">" + cont +"><b>"+response.messages[key].username+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div></div>";
+                else
+                  righter = righter + "'";
+                
+                var temp = "<div" + righter + ">" + cont +"><b>"+response.messages[key].username+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div></div>";
                 $("#display").append(temp);
             }
         }
