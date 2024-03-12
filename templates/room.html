@@ -56,14 +56,15 @@ body {
 </head>
 <body>
 
-<h2>{{room}}</h2>
+<h1>{{room}}</h1>
 
 <div id="display">
 
-<!-- <div class="container darker">
+<div class="container darker">
   <b>{{username}}</b> joined the group.
   <span class="time-left">20th, April 2021</span>
-</div> -->
+</div>
+
 
 </div>
 
@@ -78,17 +79,8 @@ setInterval(function(){
             // console.log(response);
             $("#display").empty();
             for (var key in response.messages)
-            { 
-                var cont = "<div class='container darker'";
-                var pad = "";
-                if(response.username == response.messages[key].username) {
-                  cont = cont + " style='text-align:right;'";
-                  pad = pad + " style='padding-left:50%;'";
-                }
-                else {
-                  pad = pad + " style='padding-right:50%'";
-                }
-                var temp = "<div" + pad + ">" + cont +"><b>"+response.messages[key].username+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div></div>";
+            {
+                var temp="<div class='container darker'><b>"+response.messages[key].username+"</b><p>"+response.messages[key].value+"</p><span class='time-left'>"+response.messages[key].date+"</span></div>";
                 $("#display").append(temp);
             }
         }
@@ -96,6 +88,8 @@ setInterval(function(){
 },1000);
 })
 </script>
+
+
 <div class="container">
     <style>
     input[type=text], select {
