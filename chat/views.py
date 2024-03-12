@@ -22,10 +22,11 @@ def room(request, room):
     room_details = Room.objects.get(name=room)
     username = request.GET['username']
     return render(request, 'room.html',
-                {'username':username,                 'room':room,
+                {'username':username,                 
+                 'room':room,
                  'room_details':room_details})
 
 def getMessages(request,room):
     room_details = Room.objects.get(name=room)
-    message = Message.objects.filter(room=room_details.name)
-    return JsonResponse({'messages':list(message.values())})
+    messages = Message.objects.filter(room=room)
+    return JsonResponse({'messages':list(messages.values())})
