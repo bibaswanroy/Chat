@@ -61,7 +61,7 @@ body {
 <div id="display">
 
 <div class="container darker">
-  <b>{{username}}</b> Just joined the group
+  <b>{{username}}</b> joined the group.
   <span class="time-left">20th, April 2021</span>
 </div>
 
@@ -73,7 +73,7 @@ $(document).ready(function(){
 setInterval(function(){
     $.ajax({
         type: 'GET',
-        url : "/getMessages/{{room}}/",
+        url : "/getMessages/{{room}}/{{username}}/",
         success: function(response){
             // console.log(response);
             $("#display").empty();

@@ -26,10 +26,10 @@ def room(request, room):
                  'room':room,
                  'room_details':room_details})
 
-def getMessages(request,room):
+def getMessages(request,room,username):
     room_details = Room.objects.get(name=room)
     messages = Message.objects.filter(room=room_details.id)
-    return JsonResponse({'messages':list(messages.values())})
+    return JsonResponse({'messages':list(messages.values()),"username":username})
 
 def sendMessages(request):
     room_id = request.POST['room_id']
