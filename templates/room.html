@@ -134,17 +134,6 @@ setInterval(function(){
     padding: 20px;
     }
     </style>
-  <!-- <script>
-  {% if messages %}
-    {% for message in messages %}
-      alert(message);
-    {% endfor %}
-  {% endif %}
-  </script> -->
-  <!-- <script>
-    if (alert)
-        alert(alert);
-  </script> -->
     <form id="post-form">
         {% csrf_token %}
         <input type="hidden" name="username" id="username" value="{{username}}"/>
