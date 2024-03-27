@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <title>{{room}}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
@@ -117,16 +118,16 @@ setInterval(function(){
     margin: 8px 0;
     border: none;
     border-radius: 4px;
-    cursor: pointer;
+    /* cursor: pointer; */
     }
 
-    input[type=submit]:hover {
+    input[type=submit].hover-effect {
     background-color: #45a049;
     }
 
-    input[type=submit]:disabled {
+    /* input[type=submit]:disabled {
     pointer-events: none;
-    }
+    } */
 
     div {
     border-radius: 5px;
@@ -138,39 +139,59 @@ setInterval(function(){
         {% csrf_token %}
         <input type="hidden" name="username" id="username" value="{{username}}"/>
         <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}"/>
-        <input type="text" name="message" id="message" width="100px" placeholder="Enter a message"/>
+        <input type="text" name="message" id="message" width="100px" placeholder="Enter a message" required>
         <!-- <button{% if message == "" %} disabled{% endif %}>Send</button> -->
         <input type="submit" value="Send" id="submit" disabled>
+      <script>
+        const msg = document.getElementById("message");
+        const submit = document.getElementById("submit");
+        document.addEventListener("mousemove", function() {
+          if(msg.value.trim() !== '') {
+            submit.disabled = false;
+            submit.addEventListener("mouseover", function() {
+              submit.classList.add("hover-effect");
+              submit.style.cursor = "pointer";
+            })
+            submit.addEventListener("mouseout", function() {
+              submit.classList.remove("hover-effect");
+            })
+            
+          }
+          else {
+            submit.disabled = true;
+              submit.addEventListener("mouseover", function() {
+              submit.classList.remove("hover-effect");
+              submit.style.cursor = "default";
+            })
+          }
+        })
+        msg.addEventListener("keyup", function() {
+          if(msg.value.trim() !== '') {
+            submit.disabled = false;
+            submit.addEventListener("mouseover", function() {
+              submit.classList.add("hover-effect");
+              submit.style.cursor = "pointer";
+            })
+            submit.addEventListener("mouseout", function() {
+              submit.classList.remove("hover-effect");
+            })
+            
+          }
+          else {
+            submit.disabled = true;
+              submit.addEventListener("mouseover", function() {
+              submit.classList.remove("hover-effect");
+              submit.style.cursor = "default";
+            })
+          }
+        })
 
-        <script>
-    // Get the form element
-    const someInputElement = document.getElementById("message");
+        </script>
+        
 
-    // Get the submit button
-    const submitButton = document.getElementById("submit");
+      
+    
 
-    // Add an event listener to check the input value on keyup
-    someInputElement.addEventListener("keyup", function() {
-        // Check if the input element is empty
-        if (someInputElement.value.trim() === "") {
-            // Disable the submit button
-            submitButton.disabled = true;
-
-            // Remove any hover effect styles
-            submitButton.style.backgroundColor = "inherit";
-            submitButton.style.cursor = "default";
-            // Add any other styles you want to override
-        } else {
-            // Enable the submit button
-            submitButton.disabled = false;
-
-            // Reset any hover effect styles
-            submitButton.style.backgroundColor = "";
-            submitButton.style.cursor = "";
-            // Reset any other styles you want to revert
-        }
-    });
-</script>
 
     </form>
 </div>
@@ -197,6 +218,7 @@ setInterval(function(){
     });
     document.getElementById('message').value = ''
   });
+  
 </script>
 
 </html>
