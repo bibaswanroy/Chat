@@ -10,7 +10,7 @@ def home(request):
 
 
 def checkview(request):
-    room = request.POST['room_name']
+    room = request.POST['room_name'].strip()
     username = request.POST['username']
     if Room.objects.filter(name=room).exists():
         return redirect('/' + room + '/?username=' + username)
